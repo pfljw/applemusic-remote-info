@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>뮤직 리모컨</title>
+<meta name="description" content="USB DAC를 연결한 iPad의 Apple Music을 휴대폰 브라우저에서 조종하는 리모컨">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+<body>
+<nav class="site-nav" aria-label="사이트">
+  <a class="brand" href="./">뮤직 리모컨</a>
+  <a href="./" aria-current="page">소개</a>
+  <a href="guide.html">테스터 안내</a>
+  <a href="privacy.html">개인정보처리방침</a>
+</nav>
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <div class="eyebrow">TESTFLIGHT 베타</div>
+    <h1>뮤직 리모컨</h1>
+    <p class="lead">USB DAC를 꽂은 iPad로 Apple Music을 듣는 분을 위한 리모컨입니다. 같은 Wi-Fi의 휴대폰 브라우저(안드로이드·아이폰)나 iPad 화면에서 선곡하고 재생을 조절합니다.</p>
+    <div class="actions">
+      <a class="button" data-fill="testflight" data-label="keep" data-empty="베타 참여 링크 준비 중">TestFlight로 베타 참여</a>
+      <a class="button secondary" href="guide.html">설치·사용 안내</a>
+    </div>
+  </header>
+
+  <section aria-labelledby="chain-title">
+    <h2 id="chain-title">소리가 지나가는 길</h2>
+    <div class="chain" role="img" aria-label="휴대폰 브라우저에서 Wi-Fi로 iPad의 뮤직 리모컨에 명령을 보내고, 뮤직 리모컨이 음악 앱을 조종해 USB로 DAC에 출력합니다">
+      <span class="node">휴대폰 브라우저</span><span class="arrow">— Wi-Fi →</span>
+      <span class="node key">iPad · 뮤직 리모컨</span><span class="arrow">— 조종 →</span>
+      <span class="node">iPad · 음악 앱</span><span class="arrow">— USB →</span>
+      <span class="node">DAC</span>
+    </div>
+    <p class="muted">소리는 iPad의 음악 앱이 직접 냅니다. 리모컨은 명령만 전달하므로 비트퍼펙트 출력 경로가 그대로입니다.</p>
+  </section>
+
+  <section aria-labelledby="feature-title">
+    <h2 id="feature-title">할 수 있는 것</h2>
+    <ul class="plain">
+      <li>검색, 보관함(플레이리스트·아티스트·앨범·노래), 즐겨찾는 노래</li>
+      <li>재생 조절, 가사(시간에 맞춰 따라감), 곡 목록, 잠자기 타이머</li>
+      <li>클래식 홈(작곡가·시대·작품별 녹음 비교)과 재즈 홈(시대·스타일·레이블·명반)</li>
+      <li>iPad가 DAC로 내보내는 실제 샘플레이트 표시 (예: <span class="mono">출력 96 kHz · USB</span>)</li>
+      <li>내 플레이리스트에 곡 추가, 리모컨에서 만든 플레이리스트 편집</li>
+    </ul>
+    <p class="muted">필요한 것: iPad 또는 iPhone (iOS 16 이상), Apple Music 구독, 같은 Wi-Fi의 휴대폰. USB DAC 권장.</p>
+  </section>
+
+  <section aria-labelledby="support-title">
+    <h2 id="support-title">후원</h2>
+    <p class="muted">뮤직 리모컨은 무료입니다. 도움이 되셨다면 아래로 커피 한 잔 값을 보내 주실 수 있습니다. 후원 여부와 관계없이 모든 기능을 똑같이 쓸 수 있습니다.</p>
+    <div class="support">
+      <div class="support-row"><span>토스</span><a class="button secondary" data-fill="toss" data-label="keep" data-empty="준비 중">토스로 보내기</a></div>
+      <div class="support-row"><span>카카오페이</span><a class="button secondary" data-fill="kakaopay" data-label="keep" data-empty="준비 중">카카오페이로 보내기</a></div>
+      <div class="support-row" data-show-if="githubSponsors"><span>GitHub Sponsors</span><a class="button secondary" data-fill="githubSponsors" data-label="keep">후원하기</a></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>문의: <a data-fill="feedbackEmail" data-empty="준비 중">준비 중</a></p>
+  <p>Apple Music은 Apple Inc.의 상표입니다. 뮤직 리모컨은 Apple과 관계없는 개인 프로젝트입니다.</p>
+</footer>
+</body>
+</html>

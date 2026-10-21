@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>뮤직 리모컨 베타 안내</title>
+<meta name="description" content="뮤직 리모컨 TestFlight 베타 설치·사용·문제 해결 안내">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+<body>
+<nav class="site-nav" aria-label="사이트">
+  <a class="brand" href="./">뮤직 리모컨</a>
+  <a href="./">소개</a>
+  <a href="guide.html" aria-current="page">테스터 안내</a>
+  <a href="privacy.html">개인정보처리방침</a>
+</nav>
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <div class="eyebrow">TESTFLIGHT 베타</div>
+    <h1>뮤직 리모컨 베타 안내</h1>
+    <p class="lead">USB DAC를 꽂은 iPad로 애플 뮤직을 듣는 분을 위한 리모컨입니다. 휴대폰 브라우저(안드로이드·아이폰)나 iPad 화면에서 선곡하고 재생을 조절합니다.</p>
+  </header>
+
+  <section aria-labelledby="chain-title">
+    <h2 id="chain-title">소리가 지나가는 길</h2>
+    <div class="chain" role="img" aria-label="휴대폰 브라우저에서 Wi-Fi로 iPad의 뮤직 리모컨에 명령을 보내고, 뮤직 리모컨이 음악 앱을 조종해 USB로 DAC에 출력합니다">
+      <span class="node">휴대폰 브라우저</span>
+      <span class="arrow">— Wi-Fi →</span>
+      <span class="node key">iPad · 뮤직 리모컨</span>
+      <span class="arrow">— 조종 →</span>
+      <span class="node">iPad · 음악 앱</span>
+      <span class="arrow">— USB →</span>
+      <span class="node">DAC</span>
+    </div>
+    <p class="muted">소리는 iPad의 음악 앱이 직접 냅니다. 리모컨은 "이 곡 재생" 같은 명령만 전달하므로, 지금 쓰시는 비트퍼펙트 출력 경로는 그대로입니다.</p>
+  </section>
+
+  <section aria-labelledby="need-title">
+    <h2 id="need-title">준비물</h2>
+    <ul class="plain">
+      <li>iPad (iPadOS 16 이상). iPhone에서도 동작합니다.</li>
+      <li>Apple Music 구독</li>
+      <li>iPad와 같은 Wi-Fi에 연결된 휴대폰</li>
+      <li>USB DAC (권장). 화면을 켜 둔 채 충전하려면 PD 충전 겸용 USB-C 허브가 있으면 좋습니다.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="install-title">
+    <h2 id="install-title">설치</h2>
+    <ol class="steps">
+      <li><div class="step-body"><h3>iPad에 TestFlight 설치</h3><p>App Store에서 Apple의 TestFlight 앱을 받습니다.</p></div></li>
+      <li><div class="step-body"><h3>초대 링크 열기</h3><p><a data-fill="testflight" data-label="keep" data-empty="베타 참여 링크(준비 중)">베타 참여 링크</a>를 iPad에서 열고, TestFlight에서 수락 → 설치를 누릅니다.</p></div></li>
+      <li><div class="step-body"><h3>처음 실행</h3><p>Apple Music 접근, 로컬 네트워크, 알림 요청을 모두 허용합니다. 알림은 앱이 화면 뒤로 갔을 때 알려 주는 데 씁니다.</p></div></li>
+      <li><div class="step-body"><h3>휴대폰 연결</h3><p>iPad 아래쪽 <b>설정</b> 탭 → <b>휴대폰 연결</b>에 나오는 QR을 휴대폰 카메라로 찍으면 리모컨이 열립니다. PIN은 자동으로 들어갑니다. 브라우저 메뉴의 "홈 화면에 추가"를 쓰면 앱처럼 쓸 수 있습니다.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="know-title">
+    <h2 id="know-title">꼭 알아 둘 점</h2>
+    <p class="callout"><b>iPad에서 뮤직 리모컨이 화면에 떠 있어야 휴대폰 리모컨이 작동합니다.</b> 홈 화면으로 나가거나 화면이 잠기면 멈춥니다. 앱이 켜져 있는 동안은 자동 잠금을 막고, 설정 탭의 "화면 어둡게"로 밝기를 최저로 내릴 수 있습니다.</p>
+    <div class="notes">
+      <div class="note"><h3>볼륨</h3><p>iPad 볼륨은 최대로 두고 DAC나 앰프에서 조절하세요. iPad에서 줄이면 DAC에 따라 비트퍼펙트가 깨질 수 있어서 리모컨에는 볼륨 조절을 넣지 않았습니다.</p></div>
+      <div class="note"><h3>음질 표시</h3><p>재생 화면 아래에 iPad가 DAC로 내보내는 실제 샘플레이트가 나옵니다(예: <span class="mono">출력 96 kHz · USB</span>). 48 kHz를 넘으면 "고해상도 무손실"로 표시합니다. 고해상도로 들으려면 iPad 설정 → 음악 → 오디오 품질에서 고해상도 무손실을 켜세요.</p></div>
+      <div class="note"><h3>플레이리스트</h3><p>직접 만든 플레이리스트에는 곡을 추가할 수 있습니다. 이름 바꾸기·순서·곡 빼기는 리모컨에서 만든 플레이리스트(✎ 표시)만 됩니다. 플레이리스트 삭제는 Apple이 외부 앱에 허용하지 않아 iPad 음악 앱에서 해야 합니다.</p></div>
+      <div class="note"><h3>가사</h3><p>Apple은 가사를 외부 앱에 주지 않아서 공개 가사 데이터베이스(LRCLIB)에서 찾아옵니다. 없는 곡도 있습니다.</p></div>
+      <div class="note"><h3>클래식·재즈</h3><p>둘러보기 위쪽에서 Apple Music · 클래식 · 재즈를 바꿀 수 있습니다. Apple Music Classical 앱 자체는 조종할 수 없어서, 같은 음원을 음악 앱으로 재생하는 클래식 모드를 따로 두었습니다.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="trouble-title">
+    <h2 id="trouble-title">안 될 때</h2>
+    <div>
+      <details>
+        <summary>"iPad 앱이 응답하지 않습니다"라고 나와요</summary>
+        <p>iPad에서 뮤직 리모컨이 화면에 떠 있는지, 휴대폰과 iPad가 같은 Wi-Fi인지 확인한 뒤 배너의 "다시 연결"을 누르세요.</p>
+      </details>
+      <details>
+        <summary>휴대폰에서 주소가 열리지 않아요</summary>
+        <p>iPad 설정 탭 → 휴대폰 연결에 나오는 <span class="mono">http://192.168.x.x:8080</span> 형태의 주소를 브라우저에 그대로 입력하세요. 공유기가 iPad 주소를 바꾸면 QR을 다시 찍어야 합니다.</p>
+      </details>
+      <details>
+        <summary>PIN을 물어봐요</summary>
+        <p>iPad 설정 탭 → 휴대폰 연결 화면에 4자리 PIN이 있습니다. 여러 번 틀리면 1분 동안 막힙니다.</p>
+      </details>
+      <details>
+        <summary>"고해상도 무손실"이 안 나와요</summary>
+        <p>iPad 설정 → 음악 → 오디오 품질에서 고해상도 무손실이 켜져 있는지, 출력이 USB DAC인지 확인하세요. 곡 자체가 무손실(최대 48 kHz)까지만 있는 경우도 많습니다.</p>
+      </details>
+    </div>
+  </section>
+
+  <section aria-labelledby="feedback-title">
+    <h2 id="feedback-title">의견 보내기</h2>
+    <p>TestFlight 앱 → 뮤직 리모컨 → <b>베타 피드백 보내기</b>를 쓰거나, iPad에서 스크린샷을 찍으면 나오는 TestFlight 피드백 버튼으로 화면과 함께 보낼 수 있습니다. 동호회 게시판에 남겨 주셔도 됩니다. 앱은 개인정보를 수집하지 않습니다(<a href="privacy.html">개인정보처리방침</a>). 베타 빌드는 올라온 날부터 90일이 지나면 만료되고, 그 전에 새 빌드가 올라오면 TestFlight에서 업데이트할 수 있습니다.</p>
+  </section>
+</main>
+<footer>
+  <p>문의: <a data-fill="feedbackEmail" data-empty="준비 중">준비 중</a></p>
+  <p>Apple Music은 Apple Inc.의 상표입니다. 뮤직 리모컨은 Apple과 관계없는 개인 프로젝트입니다.</p>
+</footer>
+</body>
+</html>
