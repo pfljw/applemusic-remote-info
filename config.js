@@ -1,9 +1,8 @@
 // 사이트 곳곳에 들어가는 값. 비어 있으면 '준비 중'으로 보인다.
 window.SITE = {
   testflight: '',       // TestFlight 공개 링크 (예: https://testflight.apple.com/join/XXXXXXXX)
-  feedbackEmail: '',    // 피드백·문의 이메일
-  toss: '',             // 토스 송금 링크 (예: https://toss.me/아이디)
-  kakaopay: '',         // 카카오페이 송금 링크
+  feedbackEmail: 'musicremote.feedback@gmail.com',    // 피드백·문의 이메일
+  kofi: '',             // Ko-fi 주소 (예: https://ko-fi.com/아이디)
   githubSponsors: '',   // GitHub Sponsors 주소
 };
 
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.querySelectorAll('[data-show-if]').forEach((node) => {
-    node.hidden = !(window.SITE || {})[node.dataset.showIf];
+    const keys = node.dataset.showIf.split(' ');
+    node.hidden = !keys.some((key) => (window.SITE || {})[key]);
   });
 });

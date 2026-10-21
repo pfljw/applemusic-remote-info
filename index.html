@@ -52,13 +52,12 @@
     <p class="muted">필요한 것: iPad 또는 iPhone (iOS 16 이상), Apple Music 구독, 같은 Wi-Fi의 휴대폰. USB DAC 권장.</p>
   </section>
 
-  <section aria-labelledby="support-title">
+  <section aria-labelledby="support-title" data-show-if="kofi githubSponsors" hidden>
     <h2 id="support-title">후원</h2>
     <p class="muted">뮤직 리모컨은 무료입니다. 도움이 되셨다면 아래로 커피 한 잔 값을 보내 주실 수 있습니다. 모든 기능은 후원과 관계없이 똑같습니다.</p>
     <div class="support">
-      <div class="support-row"><span>토스</span><a class="button secondary" data-fill="toss" data-label="keep" data-empty="준비 중">토스로 보내기</a></div>
-      <div class="support-row"><span>카카오페이</span><a class="button secondary" data-fill="kakaopay" data-label="keep" data-empty="준비 중">카카오페이로 보내기</a></div>
-      <div class="support-row" data-show-if="githubSponsors"><span>GitHub Sponsors</span><a class="button secondary" data-fill="githubSponsors" data-label="keep">후원하기</a></div>
+      <div class="support-row" data-show-if="kofi" hidden><span>Ko-fi (카드·페이팔)</span><a class="button secondary" data-fill="kofi" data-label="keep">커피 한 잔 보내기</a></div>
+      <div class="support-row" data-show-if="githubSponsors" hidden><span>GitHub Sponsors</span><a class="button secondary" data-fill="githubSponsors" data-label="keep">후원하기</a></div>
     </div>
   </section>
 </main>
