@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>뮤직 리모컨 도우미 (Mac)</title>
+<meta name="description" content="Mac에서 곡마다 출력 샘플레이트를 음악 앱의 실제 소리에 정확히 맞추는 뮤직 리모컨 도우미">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+<body>
+<nav class="site-nav" aria-label="사이트">
+  <a class="brand" href="./">뮤직 리모컨</a>
+  <a href="./">소개</a>
+  <a href="guide.html">테스터 안내</a>
+  <a href="helper.html" aria-current="page">Mac 도우미</a>
+  <a href="privacy.html">개인정보처리방침</a>
+</nav>
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <div class="eyebrow">MAC</div>
+    <h1>뮤직 리모컨 도우미</h1>
+    <p class="lead">Mac에서 곡마다 출력 샘플레이트(44.1~192 kHz)를 음악 앱이 실제로 내는 소리에 정확히 맞춥니다. Mac 메뉴 막대에 사는 작은 무료 앱입니다.</p>
+  </header>
+
+  <section aria-labelledby="why-title">
+    <h2 id="why-title">왜 따로 받나요</h2>
+    <p>macOS는 App Store·TestFlight로 받은 앱이 음악 앱의 실제 재생 정보를 읽지 못하게 합니다. 그래서 뮤직 리모컨(Mac) 앱 혼자서는 Apple Music 정보로 짐작해 맞출 수밖에 없습니다. 도우미는 App Store 밖에서 받는 앱이라 음악 앱이 실제로 내는 소리(샘플레이트·비트)를 확인할 수 있고, 뮤직 리모컨 앱과 함께 곡마다 정확히 맞춥니다.</p>
+    <ul class="plain">
+      <li>다음 곡은 재생 전에 미리 맞추고, 실제 소리가 다르면 한 번 고친 뒤 그 곡을 기억합니다.</li>
+      <li>음악 앱의 오디오 품질 설정(무손실·고해상도 무손실)도 실제 소리로 알아냅니다. 따로 설정할 것이 없습니다.</li>
+      <li>뮤직 리모컨 앱이 꺼져 있어도 도우미 혼자 음악 앱의 소리대로 맞춥니다.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="install-title">
+    <h2 id="install-title">설치</h2>
+    <ol class="steps">
+      <li><div class="step-body"><h3>받기</h3><p><a href="helper/MusicRemoteHelper.zip">뮤직 리모컨 도우미 받기 (macOS 14 이상)</a>. Apple의 확인(공증)을 받은 앱입니다.</p></div></li>
+      <li><div class="step-body"><h3>응용 프로그램 폴더로</h3><p>받은 파일을 열면 나오는 <b>뮤직 리모컨 도우미</b>를 응용 프로그램 폴더로 옮기고 엽니다. 메뉴 막대에 <b>파형 아이콘</b>이 생깁니다.</p></div></li>
+      <li><div class="step-body"><h3>끝</h3><p>로그인하면 저절로 열리도록 설정됩니다(메뉴에서 끌 수 있음). 뮤직 리모컨 앱이 도우미를 찾아 바로 함께 동작합니다. 리모컨 설정 → <b>곡마다 샘플레이트 맞추기</b>에 '도우미 연결됨'이 보이면 됩니다.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="need-title">
+    <h2 id="need-title">알아 둘 것</h2>
+    <ul class="plain">
+      <li><b>관리자 계정</b>에서 써야 합니다. macOS는 관리자 계정만 음악 앱의 재생 정보를 읽게 합니다.</li>
+      <li>Mac 출력 음량과 음악 앱 음량은 최대로, 볼륨은 DAC·앰프에서 조절하세요.</li>
+      <li>도우미는 이 Mac 안에서만 뮤직 리모컨 앱과 이야기합니다. 인터넷으로 아무것도 보내지 않습니다.</li>
+      <li>지우려면 메뉴의 <b>종료</b>를 누르고 응용 프로그램 폴더에서 지우면 됩니다.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
