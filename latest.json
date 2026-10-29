@@ -1,1 +1,1 @@
-{"build": 82, "testflight": "itms-beta://beta.itunes.apple.com/v1/app/6824820295"}
+{"build": 82, "builds": {"ios": 82, "tv": 82, "mac": 75}, "testflight": "itms-beta://beta.itunes.apple.com/v1/app/6824820295"}
