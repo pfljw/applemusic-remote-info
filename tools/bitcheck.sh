@@ -3,11 +3,12 @@
 # 음악 앱이 내보내는 소리가 원본과 한 비트도 다르지 않은지 확인한다. 약 10~15분, 그동안 Mac에서 소리가 안 난다.
 # 받는 것: 시험 도구(bitcheck), 가상 출력 장치 BlackHole 2ch(무료, 없을 때만 설치·관리자 암호 필요)
 #   bash bitcheck.sh          내 파일(시험 음원)로 음악 앱 출력 검사
-#   bash bitcheck.sh stream   애플뮤직 스트리밍 곡으로 검사 (같은 곡을 두 번 재생해 비교)
+#   bash bitcheck.sh stream   애플뮤직 스트리밍 곡으로 검사 (같은 곡을 여러 번 처음부터 재생해 비교)
+#   bash bitcheck.sh model    이미 받아 둔 스트리밍 소리(result/stream-*.f32)를 다시 분석 (재생 필요 없음)
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="d17cc271aae2c4edda8a1c7697cd99aa34e5fd1daff1e73dfc7b976a09025cfb"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="bc286359a6a247a634813e22c06e2b9a89cd7e3493e93bad668fa9fed4b78f8a"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
@@ -20,6 +21,15 @@ if [ -n "$BITCHECK_SHA" ]; then
 fi
 chmod +x bitcheck
 ./bitcheck env | head -1
+
+if [ "$MODE" = "model" ]; then
+  echo "== 받아 둔 스트리밍 소리 분석 (원본 없이 '아주 작은 음량 계수만 곱해졌는지' 확인)"
+  ls result/stream-*.f32 >/dev/null 2>&1 || { echo "result/stream-*.f32가 없습니다. 먼저 bash bitcheck.sh stream"; exit 1; }
+  ./bitcheck model result/stream-*.f32 | tee result/model.txt
+  echo
+  echo "결과 파일: $WORK/result/model.txt (이 내용을 그대로 보내 주세요)"
+  exit 0
+fi
 
 echo "== 2/5 가상 출력 장치 BlackHole 2ch"
 if ./bitcheck env | grep -q "BlackHole"; then
