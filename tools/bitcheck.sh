@@ -11,7 +11,7 @@
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="f5a64466523e3164c6086721f7a1ef67bd027e93c83aae1a4205ae7b8e0649ab"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="542e03a58712b0602d0f1584925fd82f1769a2c4148cffb6c499c4c3bead6ccd"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
