@@ -2,9 +2,12 @@
 # Sonlit 출력 비트 검사 (0단계) — 사용자 Mac에서 한 번 실행
 # 음악 앱이 내보내는 소리가 원본과 한 비트도 다르지 않은지 확인한다. 약 10~15분, 그동안 Mac에서 소리가 안 난다.
 # 받는 것: 시험 도구(bitcheck), 가상 출력 장치 BlackHole 2ch(무료, 없을 때만 설치·관리자 암호 필요)
+#   bash bitcheck.sh          내 파일(시험 음원)로 음악 앱 출력 검사
+#   bash bitcheck.sh stream   애플뮤직 스트리밍 곡으로 검사 (같은 곡을 두 번 재생해 비교)
 set -u
+MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="78da89517e6722c7710de47627607cb0892bdeaae75798529c5b44d8bfe26bd1"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="7a9aa332465d7b98e963b88c7817fcd17d274f11777fbe35bf69ec2907acef25"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
@@ -35,12 +38,23 @@ echo "== 3/5 권한 준비: 창이 뜨면 모두 '허용'·'확인'을 누르세
 osascript -e 'tell application "Music" to get sound volume' >/dev/null 2>&1 || true
 ./bitcheck perm --device BlackHole
 
+if [ "$MODE" = "stream" ]; then
+  echo "== 4/4 애플뮤직 스트리밍 곡 검사"
+  echo "   음악 앱 설정 > 재생 > 오디오 음질에서 '무손실'(가능하면 '고해상도 무손실')을 켜 두세요"
+  echo "   안내가 나오면 같은 애플뮤직 곡을 두 번, 매번 처음부터 재생하면 됩니다. 그동안 Mac 소리는 안 납니다"
+  ./bitcheck stream --device BlackHole --out result
+  code=$?
+  echo
+  echo "결과 파일: $WORK/result/stream-summary.txt (이 내용을 그대로 보내 주세요)"
+  exit $code
+fi
+
 echo "== 4/5 시험 음원 만들기"
 ./bitcheck gen signals || exit 1
 
 echo "== 5/5 시험 (afplay=측정 기준, music=음악 앱). 음악 앱이 몇 번 열렸다 닫힙니다"
 echo "   음악 앱 설정 > 재생에서 '사운드 체크'·'크로스페이드'·'사운드 향상기'는 꺼 두세요"
-./bitcheck run --files signals --device BlackHole --control --out result
+./bitcheck run --files signals --device BlackHole --methods loopback --control --out result
 code=$?
 echo
 echo "결과 파일: $WORK/result/summary.txt (이 내용을 그대로 보내 주세요)"
