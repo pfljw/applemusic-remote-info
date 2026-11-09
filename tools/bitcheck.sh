@@ -5,10 +5,12 @@
 #   bash bitcheck.sh          내 파일(시험 음원)로 음악 앱 출력 검사
 #   bash bitcheck.sh stream   애플뮤직 스트리밍 곡으로 검사 (같은 곡을 여러 번 처음부터 재생해 비교)
 #   bash bitcheck.sh model    이미 받아 둔 스트리밍 소리(result/stream-*.f32)를 다시 분석 (재생 필요 없음)
+#   bash bitcheck.sh seq      샘플레이트를 바꾼 뒤 어떻게 다시 틀어야 원본 그대로인지 6가지 비교 (약 3분)
+#   bash bitcheck.sh bridge   음악 앱 소리를 네트워크 플레이어(UPnP/DLNA)로 보내는 시제품 (Ctrl-C로 끝)
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="bc286359a6a247a634813e22c06e2b9a89cd7e3493e93bad668fa9fed4b78f8a"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="ad1e457d383bbdc014bda400597d518ea5049dc31b32a99cf2568e5762c505e3"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
@@ -47,6 +49,28 @@ fi
 echo "== 3/5 권한 준비: 창이 뜨면 모두 '허용'·'확인'을 누르세요"
 osascript -e 'tell application "Music" to get sound volume' >/dev/null 2>&1 || true
 ./bitcheck perm --device BlackHole
+
+if [ "$MODE" = "seq" ]; then
+  echo "== 4/4 샘플레이트 바꾼 뒤 다시 트는 방법 비교 (음악 앱이 여러 번 열렸다 닫힙니다, 약 3분)"
+  ./bitcheck gen signals >/dev/null || exit 1
+  ./bitcheck seq --files signals --device BlackHole --out result
+  code=$?
+  echo
+  echo "결과 파일: $WORK/result/seq-summary.txt (이 내용을 그대로 보내 주세요)"
+  exit $code
+fi
+
+if [ "$MODE" = "bridge" ]; then
+  echo "== 4/4 네트워크 플레이어로 보내기 (시제품)"
+  echo "   방화벽이 '들어오는 연결 허용?'을 물으면 허용을 누르세요"
+  ./bitcheck renderers
+  shift
+  ./bitcheck bridge --device BlackHole --out result "$@"
+  code=$?
+  echo
+  echo "결과 파일: $WORK/result/bridge-summary.txt (이 내용과 플레이어 화면·소리 상태를 알려 주세요)"
+  exit $code
+fi
 
 if [ "$MODE" = "stream" ]; then
   echo "== 4/4 애플뮤직 스트리밍 곡 검사"
