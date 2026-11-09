@@ -11,7 +11,7 @@
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="f077a43d8f1e21f38f95fdb218462f7382f60dec931cbbde8711ac7eaa2ceec4"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="f5a64466523e3164c6086721f7a1ef67bd027e93c83aae1a4205ae7b8e0649ab"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
@@ -58,7 +58,10 @@ osascript -e 'tell application "Music" to get sound volume' >/dev/null 2>&1 || t
 if [ "$MODE" = "seq" ]; then
   echo "== 4/4 샘플레이트 바꾼 뒤 다시 트는 방법 비교 (음악 앱이 여러 번 열렸다 닫힙니다, 약 3분)"
   ./bitcheck gen signals >/dev/null || exit 1
-  ./bitcheck seq --files signals --device BlackHole --out result
+  echo "   S12(오디오 서버 재시작) 시험에는 Mac 로그인 암호가 필요합니다. 건너뛰려면 암호 없이 Enter"
+  sudo -v 2>/dev/null || echo "   (암호 없음: S12는 건너뜁니다)"
+  echo "   S11은 음악 앱 출력을 AirPlay 기기(DR70 등)로 잠깐 바꿨다 돌아옵니다. AirPlay 기기를 켜 두세요"
+  ./bitcheck seq --files signals --device BlackHole --out result ${2+"${@:2}"}
   code=$?
   echo
   echo "결과 파일: $WORK/result/seq-summary.txt (이 내용을 그대로 보내 주세요)"
@@ -72,7 +75,7 @@ if [ "$MODE" = "listen" ]; then
   echo "   기록은 $WORK/$OUT 에 따로 저장합니다. 지금까지의 시험 결과(result 폴더)는 건드리지 않습니다"
   echo "   방화벽이 '들어오는 연결 허용?'을 물으면 허용을 누르세요"
   shift
-  ./bitcheck bridge --device BlackHole --out "$OUT" --minutes 720 "$@"
+  ./bitcheck bridge --device BlackHole --out "$OUT" --minutes 720 ${1+"$@"}
   exit $?
 fi
 
@@ -81,7 +84,7 @@ if [ "$MODE" = "bridge" ]; then
   echo "   방화벽이 '들어오는 연결 허용?'을 물으면 허용을 누르세요"
   ./bitcheck renderers
   shift
-  ./bitcheck bridge --device BlackHole --out result "$@"
+  ./bitcheck bridge --device BlackHole --out result ${1+"$@"}
   code=$?
   echo
   echo "결과 파일: $WORK/result/bridge-summary.txt (이 내용과 플레이어 화면·소리 상태를 알려 주세요)"
