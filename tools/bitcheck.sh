@@ -18,9 +18,13 @@ WORK="$HOME/Sonlit-BitCheck"
 mkdir -p "$WORK" && cd "$WORK" || exit 1
 
 echo "== 1/5 시험 도구 받기"
-curl -fsSL -o bitcheck "$BASE/bitcheck" || { echo "도구를 받지 못했습니다 ($BASE/bitcheck)"; exit 1; }
-if [ -n "$BITCHECK_SHA" ]; then
-  echo "$BITCHECK_SHA  bitcheck" | shasum -a 256 -c - >/dev/null || { echo "도구 파일 확인 실패 (다시 받아 보세요)"; exit 1; }
+# 사이트(GitHub Pages)는 파일을 최대 10분 보관해 옛 파일이 섞일 수 있다 → 버전 꼬리표를 붙여 받고, 틀리면 한 번 더
+check_tool() { [ -z "$BITCHECK_SHA" ] || echo "$BITCHECK_SHA  bitcheck" | shasum -a 256 -c - >/dev/null 2>&1; }
+curl -fsSL -o bitcheck "$BASE/bitcheck?v=${BITCHECK_SHA:-$(date +%s)}" || { echo "도구를 받지 못했습니다 ($BASE/bitcheck)"; exit 1; }
+if ! check_tool; then
+  sleep 3
+  curl -fsSL -o bitcheck "$BASE/bitcheck?t=$(date +%s)" || { echo "도구를 받지 못했습니다"; exit 1; }
+  check_tool || { echo "도구 파일 확인 실패: 사이트에 새 버전이 반영되는 중입니다. 몇 분 뒤 처음 명령(curl …)부터 다시 실행하세요"; exit 1; }
 fi
 chmod +x bitcheck
 ./bitcheck env | head -1
