@@ -7,6 +7,7 @@
 #   bash bitcheck.sh model    이미 받아 둔 스트리밍 소리(result/stream-*.f32)를 다시 분석 (재생 필요 없음)
 #   bash bitcheck.sh seq      샘플레이트를 바꾼 뒤 어떻게 다시 틀어야 원본 그대로인지 6가지 비교 (약 3분)
 #   bash bitcheck.sh bridge   음악 앱 소리를 네트워크 플레이어(UPnP/DLNA)로 보내는 시제품 (Ctrl-C로 끝)
+#   bash bitcheck.sh listen   같은 다리로 음악 듣기: 최대 12시간, 기록은 listen/날짜 폴더에 따로 (시험 결과는 그대로 둠)
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
@@ -58,6 +59,17 @@ if [ "$MODE" = "seq" ]; then
   echo
   echo "결과 파일: $WORK/result/seq-summary.txt (이 내용을 그대로 보내 주세요)"
   exit $code
+fi
+
+if [ "$MODE" = "listen" ]; then
+  OUT="listen/$(date +%Y%m%d-%H%M%S)"
+  mkdir -p "$OUT"
+  echo "== 네트워크 플레이어로 음악 듣기 (끝내려면 Ctrl-C)"
+  echo "   기록은 $WORK/$OUT 에 따로 저장합니다. 지금까지의 시험 결과(result 폴더)는 건드리지 않습니다"
+  echo "   방화벽이 '들어오는 연결 허용?'을 물으면 허용을 누르세요"
+  shift
+  ./bitcheck bridge --device BlackHole --out "$OUT" --minutes 720 "$@"
+  exit $?
 fi
 
 if [ "$MODE" = "bridge" ]; then
