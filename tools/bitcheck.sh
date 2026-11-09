@@ -7,7 +7,7 @@
 set -u
 MODE="${1:-run}"
 BASE="${BITCHECK_BASE:-https://pfljw.github.io/applemusic-remote-info/tools}"
-BITCHECK_SHA="7a9aa332465d7b98e963b88c7817fcd17d274f11777fbe35bf69ec2907acef25"   # 공개할 때 채운다 (도구 파일 지문)
+BITCHECK_SHA="e8ab22be76424b94a22bf1e72019be2d573f45b1bcf101802a86955c4a0eef41"   # 공개할 때 채운다 (도구 파일 지문)
 BH_URL="https://existential.audio/downloads/BlackHole2ch-0.7.1.pkg"
 BH_SHA="57b540f27a3e29c37e310e01bee0fdfab76733087e47f997ef9dccf851400dcf"
 WORK="$HOME/Sonlit-BitCheck"
@@ -41,7 +41,7 @@ osascript -e 'tell application "Music" to get sound volume' >/dev/null 2>&1 || t
 if [ "$MODE" = "stream" ]; then
   echo "== 4/4 애플뮤직 스트리밍 곡 검사"
   echo "   음악 앱 설정 > 재생 > 오디오 음질에서 '무손실'(가능하면 '고해상도 무손실')을 켜 두세요"
-  echo "   안내가 나오면 같은 애플뮤직 곡을 두 번, 매번 처음부터 재생하면 됩니다. 그동안 Mac 소리는 안 납니다"
+  echo "   안내가 나오면 같은 애플뮤직 곡을 세 번, 매번 처음부터 재생하면 됩니다 (약 3분). 그동안 Mac 소리는 안 납니다"
   ./bitcheck stream --device BlackHole --out result
   code=$?
   echo
